@@ -1,0 +1,481 @@
+<?xml version="1.0"?>
+<robot name="Assento">
+    
+    <link name="base_link" >
+
+    </link>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint">
+    </link>
+
+    <joint name="robot_base_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="robot_base"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="robot_base">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.21041666666667" iyz="0.0" izz="0.34166666666667" iyy="0.13541666666667" />
+            <mass value="10.0" />
+        </inertial>
+        <collision name="Assento">
+            <origin xyz="0.000000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.400000 0.490000 0.050000" />
+            </geometry>
+        </collision>
+        <visual name="Assento">
+            <origin xyz="0.000000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.400000 0.490000 0.050000" />
+            </geometry>
+            <material name="robot_base_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ColunaEsquerdaTraseiraLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ColunaEsquerdaTraseira" />
+        <origin xyz="-0.175000 0.275000 0.500000" rpy="-1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="ColunaEsquerdaTraseira">
+        <inertial>
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.12838541666667" iyz="0.0" izz="0.00088541666666667" iyy="0.12838541666667" />
+            <mass value="2.125" />
+        </inertial>
+        <collision name="ColunaEsquerdaTraseira">
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.825000" />
+            </geometry>
+        </collision>
+        <visual name="ColunaEsquerdaTraseira">
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.825000" />
+            </geometry>
+            <material name="ColunaEsquerdaTraseira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="BaseEsquerdaLink">
+        <axis xyz="0 0 1" />
+        <parent link="ColunaEsquerdaTraseira" />
+        <child link="BaseEsquerda" />
+        <origin xyz="0.000000 -0.300000 0.000000" rpy="1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="BaseEsquerda">
+        <inertial>
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00052083333333333" iyz="0.0" izz="0.026302083333333" iyy="0.026302083333333" />
+            <mass value="1.25" />
+        </inertial>
+        <collision name="BaseEsquerda">
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.600000 0.050000 0.050000" />
+            </geometry>
+        </collision>
+        <visual name="BaseEsquerda">
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.600000 0.050000 0.050000" />
+            </geometry>
+            <material name="BaseEsquerda_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="continuous" name="MotorEsquerdo">
+        <axis xyz="0 0 -1" />
+        <parent link="BaseEsquerda" />
+        <child link="RodaEsquerdaTraseira" />
+        <origin xyz="-0.075000 0.075000 0.000000" rpy="-1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="RodaEsquerdaTraseira">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.020616701789184" iyz="0.0" izz="0.039760782021998" iyy="0.020616701789184" />
+            <mass value="3.5342917352887" />
+        </inertial>
+        <collision name="RodaEsquerdaTraseira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <cylinder length="0.05" radius="0.2" />
+            </geometry>
+        </collision>
+        <visual name="RodaEsquerdaTraseira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <cylinder length="0.05" radius="0.2" />
+            </geometry>
+            <material name="RodaEsquerdaTraseira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="RodaEsquerdaDianteiraLink">
+        <axis xyz="0 0 1" />
+        <parent link="BaseEsquerda" />
+        <child link="RodaEsquerdaDianteira" />
+        <origin xyz="0.475000 0.000000 -0.110000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="RodaEsquerdaDianteira">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.016755160819147" iyz="0.0" izz="0.016755160819147" iyy="0.016755160819147" />
+            <mass value="4.1887902047867" />
+        </inertial>
+        <collision name="RodaEsquerdaDianteira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <sphere radius="0.085" />
+            </geometry>
+        </collision>
+        <visual name="RodaEsquerdaDianteira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <sphere radius="0.085" />
+            </geometry>
+            <material name="RodaEsquerdaDianteira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <gazebo reference="RodaEsquerdaDianteira">
+        <material>Gazebo/White</material>
+        <mu1 value="0.04"/>
+        <mu2 value="0.04"/>
+    </gazebo>
+
+    <joint type="fixed" name="ColunaEsquerdaDianteiraLink">
+        <axis xyz="0 0 1" />
+        <parent link="BaseEsquerda" />
+        <child link="ColunaEsquerdaDianteira" />
+        <origin xyz="0.350000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ColunaEsquerdaDianteira">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00578125" iyz="0.0" izz="0.0003125" iyy="0.00578125" />
+            <mass value="0.75" />
+        </inertial>
+        <collision name="ColunaEsquerdaDianteira">
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.475000" />
+            </geometry>
+        </collision>
+        <visual name="ColunaEsquerdaDianteira">
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.475000" />
+            </geometry>
+            <material name="ColunaEsquerdaDianteira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ColunaDireitaTraseiraLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ColunaDireitaTraseira" />
+        <origin xyz="-0.175000 -0.275000 0.500000" rpy="-1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="ColunaDireitaTraseira">
+        <inertial>
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.12838541666667" iyz="0.0" izz="0.00088541666666667" iyy="0.12838541666667" />
+            <mass value="2.125" />
+        </inertial>
+        <collision name="ColunaDireitaTraseira">
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.825000" />
+            </geometry>
+        </collision>
+        <visual name="ColunaDireitaTraseira">
+            <origin xyz="0.000000 0.150000 -0.000000" rpy="1.570796 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.825000" />
+            </geometry>
+            <material name="ColunaDireitaTraseira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="BaseDireitaLink">
+        <axis xyz="0 0 1" />
+        <parent link="ColunaDireitaTraseira" />
+        <child link="BaseDireita" />
+        <origin xyz="0.000000 -0.300000 0.000000" rpy="1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="BaseDireita">
+        <inertial>
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00052083333333333" iyz="0.0" izz="0.026302083333333" iyy="0.026302083333333" />
+            <mass value="1.25" />
+        </inertial>
+        <collision name="BaseDireita">
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.600000 0.050000 0.050000" />
+            </geometry>
+        </collision>
+        <visual name="BaseDireita">
+            <origin xyz="0.200000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.600000 0.050000 0.050000" />
+            </geometry>
+            <material name="BaseDireita_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="continuous" name="MotorDireito">
+        <axis xyz="0 0 -1" />
+        <parent link="BaseDireita" />
+        <child link="RodaDireitaTraseira" />
+        <origin xyz="-0.075000 -0.075000 0.000000" rpy="-1.570796 3.141593 -3.141593" />
+    </joint>
+    <link name="RodaDireitaTraseira">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.020616701789184" iyz="0.0" izz="0.039760782021998" iyy="0.020616701789184" />
+            <mass value="3.5342917352887" />
+        </inertial>
+        <collision name="RodaDireitaTraseira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <cylinder length="0.05" radius="0.2" />
+            </geometry>
+        </collision>
+        <visual name="RodaDireitaTraseira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <cylinder length="0.05" radius="0.2" />
+            </geometry>
+            <material name="RodaDireitaTraseira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ColunaDireitaDianteira">
+        <axis xyz="0 0 1" />
+        <parent link="BaseDireita" />
+        <child link="ColunaDireitaDianteira_2" />
+        <origin xyz="0.350000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ColunaDireitaDianteira_2">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00578125" iyz="0.0" izz="0.0003125" iyy="0.00578125" />
+            <mass value="0.75" />
+        </inertial>
+        <collision name="ColunaDireitaDianteira">
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.475000" />
+            </geometry>
+        </collision>
+        <visual name="ColunaDireitaDianteira">
+            <origin xyz="0.000000 0.000000 0.275000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.050000 0.475000" />
+            </geometry>
+            <material name="ColunaDireitaDianteira_2_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="RodaDireitaDianteiraLink">
+        <axis xyz="0 0 1" />
+        <parent link="BaseDireita" />
+        <child link="RodaDireitaDianteira" />
+        <origin xyz="0.475000 0.000000 -0.110000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="RodaDireitaDianteira">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.016755160819147" iyz="0.0" izz="0.016755160819147" iyy="0.016755160819147" />
+            <mass value="4.1887902047867" />
+        </inertial>
+        <collision name="RodaDireitaDianteira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <sphere radius="0.085" />
+            </geometry>
+        </collision>
+        <visual name="RodaDireitaDianteira">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <sphere radius="0.085" />
+            </geometry>
+            <material name="RodaDireitaDianteira_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <gazebo reference="RodaDireitaDianteira">
+        <material>Gazebo/White</material>
+        <mu1 value="0.04"/>
+        <mu2 value="0.04"/>
+    </gazebo>
+
+    <joint type="fixed" name="ApoioCostasLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ApoioCostas" />
+        <origin xyz="-0.175000 0.000000 0.800000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ApoioCostas">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.2125" iyz="0.0" izz="0.1578125" iyy="0.0578125" />
+            <mass value="7.5" />
+        </inertial>
+        <collision name="ApoioCostas">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.490000 0.300000" />
+            </geometry>
+        </collision>
+        <visual name="ApoioCostas">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.050000 0.490000 0.300000" />
+            </geometry>
+            <material name="ApoioCostas_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ApoioBracoEsquerdoLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ApoioBracoEsquerdo" />
+        <origin xyz="0.000000 0.275000 0.700000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ApoioBracoEsquerdo">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00036458333333333" iyz="0.0" izz="0.0091145833333333" iyy="0.0091145833333333" />
+            <mass value="0.875" />
+        </inertial>
+        <collision name="ApoioBracoEsquerdo">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.300000 0.050000 0.050000" />
+            </geometry>
+        </collision>
+        <visual name="ApoioBracoEsquerdo">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.300000 0.050000 0.050000" />
+            </geometry>
+            <material name="ApoioBracoEsquerdo_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ApoioBracoDireitoLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ApoioBracoDireito" />
+        <origin xyz="0.000000 -0.275000 0.700000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ApoioBracoDireito">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.00036458333333333" iyz="0.0" izz="0.0091145833333333" iyy="0.0091145833333333" />
+            <mass value="0.875" />
+        </inertial>
+        <collision name="ApoioBracoDireito">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.290000 0.050000 0.050000" />
+            </geometry>
+        </collision>
+        <visual name="ApoioBracoDireito">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.290000 0.050000 0.050000" />
+            </geometry>
+            <material name="ApoioBracoDireito_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="fixed" name="ApoioLidarLink">
+        <axis xyz="0 0 1" />
+        <parent link="robot_base" />
+        <child link="ApoioLidar" />
+        <origin xyz="-0.225000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="ApoioLidar">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia ixz="0.0" ixy="0.0" ixx="0.20885416666667" iyz="0.0" izz="0.0010416666666667" iyy="0.20885416666667" />
+            <mass value="2.5" />
+        </inertial>
+        <collision name="ApoioLidar">
+            <origin xyz="0.000000 0.000000 0.500000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <box size="0.020000 0.020000 1.000000" />
+            </geometry>
+        </collision>
+        <visual name="ApoioLidar">
+            <origin xyz="0.000000 0.000000 0.500000" rpy="0 0 0" />
+            <geometry>
+                <box size="0.020000 0.020000 1.000000" />
+            </geometry>
+            <material name="ApoioLidar_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint type="revolute" name="MotorLidar">
+        <axis xyz="0 1 0" />
+        <parent link="ApoioLidar" />
+        <child link="laser_frame" />
+        <origin xyz="0.000000 -0.0000 1.040000" rpy="0 0 0" />
+        <limit lower="-2" upper="1.2" effort="1000" velocity="1000" />
+    </joint>
+    <link name="laser_frame">
+        <inertial>
+            <origin xyz="0.000000 0.0000 -0.000000" rpy="0 0 0" />
+            <inertia ixz="0.0" ixy="0.0" ixx="2.2743821815053e-05" iyz="0.0" izz="2.4543692606172e-05" iyy="2.2743821815053e-05" />
+            <mass value="0.07853981633975" />
+        </inertial>
+        <collision>
+            <origin xyz="0.000000 0.0000 -0.000000" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="0.04" radius="0.025" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.000000 0.0000 -0.000000" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="0.04" radius="0.025" />
+            </geometry>
+            <material name="Lidar_material">
+                <color rgba="0.850000 0.850000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+
+</robot>

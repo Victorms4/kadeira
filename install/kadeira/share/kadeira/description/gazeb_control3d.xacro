@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="MotorLidar">
+            <command_interface name="position">
+                <param name="min">-2</param>
+                <param name="max">1.2</param>
+            </command_interface>
+            <state_interface name="position" >
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity" />
+        </joint>
+    </ros2_control>
+
+    <gazebo>
+        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+            <!-- Wheel Information -->
+            <left_joint>MotorEsquerdo</left_joint>
+            <right_joint>MotorDireito</right_joint>
+            <wheel_separation>0.7</wheel_separation>
+            <wheel_diameter>0.4</wheel_diameter>
+
+
+            <!-- Limits -->
+            <max_wheel_torque>100</max_wheel_torque>
+            <max_wheel_acceleration>2.0</max_wheel_acceleration>
+
+            
+            <!-- Output -->
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <parameters>$(find kadeira)/config/joint_controller.yaml</parameters>
+        </plugin>
+    </gazebo>
+    
+    
+    <gazebo reference="laser_frame">
+        
+        <material>Gazebo/Black</material>
+        
+        <sensor name="unitree_4d_lidar" type="gpu_ray">
+            <pose>0 0 0 0 0 0</pose>  <!-- Ajuste a pose conforme a montagem na cadeira -->
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            
+            <!-- Configuração do campo de visão 3D -->
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>  <!-- Varredura horizontal (ajuste para o ângulo desejado) -->
+                        <min_angle>-1.5708</min_angle> <!-- -90° (esquerda) -->
+                        <max_angle>1.5708</max_angle>  <!-- +90° (direita) -->
+                    </horizontal>
+                    <vertical>
+                        <samples>64</samples>  <!-- Varredura vertical (típico em LiDARs 3D) -->
+                        <min_angle>-0.2618</min_angle> <!-- -15° (para baixo) -->
+                        <max_angle>0.2618</max_angle>  <!-- +15° (para cima) -->
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12.0</max>  <!-- Alcance máximo ajustável -->
+                    <resolution>0.01</resolution>
+                </range>
+            </ray>
+
+            <!-- Plugin para saída como PointCloud2 (dados 3D) -->
+            <plugin name="lidar3d_controller" filename="libgazebo_ros_gpu_laser.so">
+                <ros>
+                    <remapping>~/out:=pointcloud</remapping>
+                </ros>
+                <output_type>sensor_msgs/PointCloud2</output_type>
+                <frame_name>lidar3d_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>
