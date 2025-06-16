@@ -1,0 +1,9 @@
+ros2 launch kadeira launch_sim.launch.py world:=./src/kadeira/world/corredor.world
+
+ros2 launch kadeira localization_launch.py map:=./src/kadeira/map/corredorMapa.yaml use_sim_time:=true
+
+//posição inicial
+
+ros2 launch kadeira navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
+
+ros2 run kadeira controlador_lidar
